@@ -9,10 +9,11 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 
-function Navbar() {
+function Navbar({setComponent}) {
     const [value, setValue] = useState('pokemons');
 
     const handleChange = (e, newValue) => {
+        setComponent(newValue);
         setValue(newValue);
     }
     return (<>

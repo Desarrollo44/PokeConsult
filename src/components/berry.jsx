@@ -1,10 +1,10 @@
 import { Typography } from "@mui/material";
 import { useState } from "react";
 
-function Pokemons(){
+function Berries(){
     
     return(<>
-        <Typography>aaaaaa</Typography>
+        <Typography>oooooo</Typography>
     </>);
 }
-export default Pokemons;
+export default Berries;
