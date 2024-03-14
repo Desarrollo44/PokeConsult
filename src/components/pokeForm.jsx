@@ -9,6 +9,11 @@ function PokeForm({setParam}){
        setPokeParam('');
     //    console.log(pokePram);
     }
+    const handleEnter=(e)=>{
+        if(e.key=='Enter'){
+            handleSearch();
+        }
+    }
     const handleChange=(e)=>{
         setPokeParam(e.target.value);
     }
@@ -20,6 +25,7 @@ function PokeForm({setParam}){
         variant="outlined"
         value={pokePram}
         onChange={handleChange}
+        onKeyDown={handleEnter}
         />
         <Button 
         onClick={handleSearch}
