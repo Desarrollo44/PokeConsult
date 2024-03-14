@@ -1,7 +1,7 @@
 import { Typography } from "@mui/material";
 import { useState } from "react";
 
-function Berries(){
+function Berries({param}){
     
     return(<>
         <Typography>oooooo</Typography>

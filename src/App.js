@@ -24,11 +24,11 @@ function App() {
   const renderComponente = () => {
     switch (component) {
       case 'pokemons':
-        return <Pokemons/>;
+        return <Pokemons param={pokeParam}/>;
       case 'berry':
-        return <Berries/>;
+        return <Berries param={pokeParam}/>;
       case 'games':
-        return <Games />;
+        return <Games param={pokeParam}/>;
       default:
         return null; // O un componente por defecto
     }
@@ -42,7 +42,7 @@ function App() {
       <body style={{ marginTop: '8%', padding: '20px' }}>
         <PokeForm setParam={setParam} />
         <Box
-          height={650}
+          // height={650}
           sx={{
             border: '3px solid #887DFF',
             my: 3,

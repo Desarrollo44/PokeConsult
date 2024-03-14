@@ -1,7 +1,7 @@
 import { Typography } from "@mui/material";
 import { useState } from "react";
 
-function Games(){
+function Games({param}){
     
     return(<>
         <Typography>eeee</Typography>
