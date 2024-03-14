@@ -6,6 +6,7 @@ function PokeForm({setParam}){
 
     const handleSearch =()=>{
        setParam(pokePram);
+       setPokeParam('');
     //    console.log(pokePram);
     }
     const handleChange=(e)=>{
