@@ -85,7 +85,7 @@ function Items({ param }) {
                                 </Box>
                                 <Box>
                                     <Typography variant="h5">Category:</Typography>
-                                    <Typography marginLeft={2}><li>{pokeConsult.category.name}</li></Typography>
+                                    <Typography marginLeft={2}><li>{pokeConsult.category?.name}</li></Typography>
                                 </Box>
 
                             </Box>
