@@ -35,7 +35,7 @@ function Navbar({ setComponent }) {
             <Typography
                 fontSize={'50px'}
                 variant="h1"
-            >Poke-Counsult</Typography>
+            >Poke-Consult</Typography>
             <BottomNavigation
                 style={{ backgroundColor: '#7DFFBA', marginLeft: '5rem', display: 'flex', gap: '3rem' }}
                 value={value}
