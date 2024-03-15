@@ -7,15 +7,16 @@ import { Box } from '@mui/material';
 import Pokemons from './components/pokemons';
 import Berries from './components/berry';
 import Games from './components/games';
+import Items from './components/items';
 
 function App() {
 
   const [pokeParam, setPokeParam] = useState('');
-  const [component,setComponent]=useState('pokemons');
+  const [component, setComponent] = useState('pokemons');
   const setParam = async (newParam) => {
     setPokeParam(newParam);
   };
-  const renderizarC=async(newComponent)=>{
+  const renderizarC = async (newComponent) => {
     setComponent(newComponent)
   }
   useEffect(() => {
@@ -24,20 +25,22 @@ function App() {
   const renderComponente = () => {
     switch (component) {
       case 'pokemons':
-        return <Pokemons param={pokeParam}/>;
+        return <Pokemons param={pokeParam} />;
       case 'berry':
-        return <Berries param={pokeParam}/>;
+        return <Berries param={pokeParam} />;
       case 'games':
-        return <Games param={pokeParam}/>;
+        return <Games param={pokeParam} />;
+      case 'items':
+        return <Items param={pokeParam} />;
       default:
         return null; // O un componente por defecto
     }
   };
- 
+
   return (
     <div className="App">
       <header className="App-header">
-        <Navbar setComponent={renderizarC}/>
+        <Navbar setComponent={renderizarC} />
       </header>
       <body style={{ marginTop: '8%', padding: '20px' }}>
         <PokeForm setParam={setParam} />

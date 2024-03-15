@@ -76,16 +76,17 @@ function Pokemons({ param }) {
                         margin={6}
                         gap={3}
                     >
-                        <Typography variant="h4">{`Nombre del Pokémon: ${pokeConsult.name}`}</Typography>
+                        <Typography variant="h4">{`Pokemon's name: ${pokeConsult.name}`}</Typography>
+                        <Typography variant="h5">{`Pokedex's number: ${pokeConsult.id}`}</Typography>
                         <Box display={'flex'} flexDirection={'row'} gap={6}>
                             <Box>
-                                <Typography variant="h5">Tipos:</Typography>
+                                <Typography variant="h5">Types:</Typography>
                                 {pokeConsult.types && pokeConsult.types.map(types => (
                                     <Typography marginLeft={2}><li>{types.type.name}</li></Typography>
                                 ))}
                             </Box>
                             <Box>
-                                <Typography variant="h5">Habilidades:</Typography>
+                                <Typography variant="h5">Abilities:</Typography>
                                 {pokeConsult.types && pokeConsult.abilities.map(abilities => (
                                     <Typography marginLeft={2}><li>{abilities.ability.name}</li></Typography>
                                 ))}
@@ -98,11 +99,11 @@ function Pokemons({ param }) {
                             margin={5}
                         >
                             <Box>
-                                <Typography variant="h5">Sprite predeterminado:</Typography>
+                                <Typography variant="h5">Sprite default:</Typography>
                                 <img width={'300px'} height={'300px'} alt={pokeConsult.name} src={pokeConsult.sprites?.front_default} />
                             </Box>
                             <Box>
-                                <Typography variant="h5">Sprite brillante:</Typography>
+                                <Typography variant="h5">Sprite shiny:</Typography>
                                 <img width={'300px'} height={'300px'} alt={pokeConsult.name} src={pokeConsult.sprites?.front_shiny} />
                             </Box>
                         </Box>

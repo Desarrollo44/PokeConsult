@@ -5,10 +5,10 @@ import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import PetsIcon from '@mui/icons-material/Pets';
 import EggAltIcon from '@mui/icons-material/EggAlt';
 import VideogameAssetIcon from '@mui/icons-material/VideogameAsset';
+import CardTravelRoundedIcon from '@mui/icons-material/CardTravelRounded';
 
 
-
-function Navbar({setComponent}) {
+function Navbar({ setComponent }) {
     const [value, setValue] = useState('pokemons');
 
     const handleChange = (e, newValue) => {
@@ -37,7 +37,7 @@ function Navbar({setComponent}) {
                 variant="h1"
             >Poke-Counsult</Typography>
             <BottomNavigation
-                style={{ backgroundColor: '#7DFFBA', marginLeft: '5rem',display:'flex',gap:'3rem' }}
+                style={{ backgroundColor: '#7DFFBA', marginLeft: '5rem', display: 'flex', gap: '3rem' }}
                 value={value}
                 onChange={handleChange}
             >
@@ -54,6 +54,11 @@ function Navbar({setComponent}) {
                     label="Games"
                     value='games'
                     icon={<VideogameAssetIcon style={{ fontSize: 40 }} />} />
+                <BottomNavigationAction
+                    style={{ fontSize: 40 }}
+                    label="Items"
+                    value='items'
+                    icon={<CardTravelRoundedIcon style={{ fontSize: 40 }} />} />
             </BottomNavigation>
         </Box>
     </>);
