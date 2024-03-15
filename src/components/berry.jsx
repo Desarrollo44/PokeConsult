@@ -72,7 +72,7 @@ function Berries({ param }) {
                     </Box>
                 ) : (
                     error === '' ? (
-                        <Fade in={error === ''} timeout={2000}>4123
+                        <Fade in={error === ''} timeout={2000}>
                         <Box
                             display={'flex'}
                             flexDirection={'column'}
