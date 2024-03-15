@@ -1,12 +1,11 @@
 import { useState } from "react";
-import { Avatar, Box, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import PetsIcon from '@mui/icons-material/Pets';
 import EggAltIcon from '@mui/icons-material/EggAlt';
 import VideogameAssetIcon from '@mui/icons-material/VideogameAsset';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
+
 
 
 function Navbar({setComponent}) {

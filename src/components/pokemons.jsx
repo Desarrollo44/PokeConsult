@@ -2,6 +2,7 @@ import { Typography, Box, CircularProgress } from "@mui/material";
 import { useState, useEffect } from "react";
 import SearchIcon from '@mui/icons-material/Search';
 import axios from "axios";
+import Fade from '@mui/material/Fade';
 
 function Pokemons({ param }) {
     const [pokeConsult, setPokeConsult] = useState({});
@@ -41,7 +42,7 @@ function Pokemons({ param }) {
             alignItems='center'
         >
             Cargando...
-            <CircularProgress style={{width:'100px', height:'100px'}}/>
+            <CircularProgress style={{ width: '100px', height: '100px' }} />
         </Box>);
     }
 
@@ -49,7 +50,9 @@ function Pokemons({ param }) {
     return (
         <Box>
             {pokeParam === '' ? (
+
                 <Box
+                    
                     display={'flex'}
                     style={{ margin: '0 auto' }}
                     width={400}
@@ -63,6 +66,7 @@ function Pokemons({ param }) {
                 </Box>
             ) : (
                 error === '' ? (
+                   <Fade in={error === ''} timeout={2000}>
                     <Box
                         display={'flex'}
                         flexDirection={'column'}
@@ -72,16 +76,16 @@ function Pokemons({ param }) {
                         margin={6}
                         gap={3}
                     >
-                        <Typography variant="h4">{`Pokemon's name: ${pokeConsult.name}`}</Typography>
+                        <Typography variant="h4">{`Nombre del Pokémon: ${pokeConsult.name}`}</Typography>
                         <Box display={'flex'} flexDirection={'row'} gap={6}>
                             <Box>
-                                <Typography variant="h5">Types:</Typography>
+                                <Typography variant="h5">Tipos:</Typography>
                                 {pokeConsult.types && pokeConsult.types.map(types => (
                                     <Typography marginLeft={2}><li>{types.type.name}</li></Typography>
                                 ))}
                             </Box>
                             <Box>
-                                <Typography variant="h5">abilities:</Typography>
+                                <Typography variant="h5">Habilidades:</Typography>
                                 {pokeConsult.types && pokeConsult.abilities.map(abilities => (
                                     <Typography marginLeft={2}><li>{abilities.ability.name}</li></Typography>
                                 ))}
@@ -94,15 +98,16 @@ function Pokemons({ param }) {
                             margin={5}
                         >
                             <Box>
-                                <Typography variant="h5">Sprite default:</Typography>
+                                <Typography variant="h5">Sprite predeterminado:</Typography>
                                 <img width={'300px'} height={'300px'} alt={pokeConsult.name} src={pokeConsult.sprites?.front_default} />
                             </Box>
                             <Box>
-                                <Typography variant="h5">Sprite shiny:</Typography>
+                                <Typography variant="h5">Sprite brillante:</Typography>
                                 <img width={'300px'} height={'300px'} alt={pokeConsult.name} src={pokeConsult.sprites?.front_shiny} />
                             </Box>
                         </Box>
                     </Box>
+                </Fade>
                 ) : (
                     <Box
                         width={600}
@@ -110,8 +115,14 @@ function Pokemons({ param }) {
                         margin={'0 auto'}
                         color={'red'}
                     >
-                        <Typography>{error}</Typography>
-                        <img style={{ marginLeft: '6rem' }} src="https://i.pinimg.com/originals/7b/d6/ab/7bd6abf0cb4502e87fd70fad35c66184.gif" />
+                        <Fade in={error!==''} timeout={2000}>
+                            <div>
+                                <Typography>{error}</Typography>
+                                {/* Otro contenido aquí, como imágenes o videos */}
+                                <img style={{ marginLeft: '6rem' }} src="https://i.pinimg.com/originals/7b/d6/ab/7bd6abf0cb4502e87fd70fad35c66184.gif" alt="error" loop />
+                            </div>
+                        </Fade>
+
                     </Box>
                 )
             )}

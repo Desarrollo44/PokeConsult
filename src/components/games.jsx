@@ -9,7 +9,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
 import SearchIcon from '@mui/icons-material/Search';
-import { Typography, Box, CircularProgress} from "@mui/material";
+import { Typography, Box, CircularProgress,Fade} from "@mui/material";
 
 function Games({param}){
     const [gameConsult, setGameConsult] = useState({});
@@ -73,6 +73,7 @@ function Games({param}){
                     </Box>
                 ) : (
                     error === '' ? (
+                        <Fade in={error === ''} timeout={2000}>
                         <Box
                             display={'flex'}
                             flexDirection={'column'}
@@ -119,6 +120,7 @@ function Games({param}){
                                 </Box>
                             </Box>
                         </Box>
+                        </Fade>
                     ) : (
                         <Box
                             width={600}
@@ -126,8 +128,13 @@ function Games({param}){
                             margin={'0 auto'}
                             color={'red'}
                         >
-                            <Typography>{error}</Typography>
-                            <img style={{ marginLeft: '6rem' }} src="https://i.pinimg.com/originals/7b/d6/ab/7bd6abf0cb4502e87fd70fad35c66184.gif" />
+                           <Fade in={error!==''} timeout={2000}>
+                            <div>
+                                <Typography>{error}</Typography>
+                                {/* Otro contenido aquí, como imágenes o videos */}
+                                <img style={{ marginLeft: '6rem' }} src="https://i.pinimg.com/originals/7b/d6/ab/7bd6abf0cb4502e87fd70fad35c66184.gif" alt="error" loop />
+                            </div>
+                        </Fade>
                         </Box>
                     )
                 )

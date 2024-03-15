@@ -1,4 +1,4 @@
-import { Typography, Box, CircularProgress } from "@mui/material";
+import { Typography, Box, CircularProgress,Fade } from "@mui/material";
 import Table from "@mui/material/Table";
 import { useState, useEffect } from "react";
 import TableBody from '@mui/material/TableBody';
@@ -55,7 +55,9 @@ function Berries({ param }) {
                     <CircularProgress style={{ width: '100px', height: '100px' }} />
                 </Box>
             ) : (
+                
                 berryParam === '' ? (
+                    
                     <Box
                         display={'flex'}
                         style={{ margin: '0 auto' }}
@@ -70,6 +72,7 @@ function Berries({ param }) {
                     </Box>
                 ) : (
                     error === '' ? (
+                        <Fade in={error === ''} timeout={2000}>4123
                         <Box
                             display={'flex'}
                             flexDirection={'column'}
@@ -118,6 +121,7 @@ function Berries({ param }) {
                                 </Box>
                             </Box>
                         </Box>
+                        </Fade>
                     ) : (
                         <Box
                             width={600}
@@ -125,8 +129,13 @@ function Berries({ param }) {
                             margin={'0 auto'}
                             color={'red'}
                         >
-                            <Typography>{error}</Typography>
-                            <img style={{ marginLeft: '6rem' }} src="https://i.pinimg.com/originals/7b/d6/ab/7bd6abf0cb4502e87fd70fad35c66184.gif" />
+                        <Fade in={error!==''} timeout={2000}>
+                            <div>
+                                <Typography>{error}</Typography>
+                                {/* Otro contenido aquí, como imágenes o videos */}
+                                <img style={{ marginLeft: '6rem' }} src="https://i.pinimg.com/originals/7b/d6/ab/7bd6abf0cb4502e87fd70fad35c66184.gif" alt="error" loop />
+                            </div>
+                        </Fade>
                         </Box>
                     )
                 )

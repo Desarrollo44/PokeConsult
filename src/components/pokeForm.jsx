@@ -1,5 +1,5 @@
-import { useState,useEffect } from "react";
-import { Box,TextField,Button } from "@mui/material";
+import { useState} from "react";
+import { TextField,Button } from "@mui/material";
 
 function PokeForm({setParam}){
     const[pokePram,setPokeParam]=useState('');
@@ -9,8 +9,8 @@ function PokeForm({setParam}){
        setPokeParam('');
     //    console.log(pokePram);
     }
-    const handleEnter=(e)=>{
-        if(e.key=='Enter'){
+    const handleEnter=(e)=>{ 
+        if(e.key==='Enter'){
             handleSearch();
         }
     }
