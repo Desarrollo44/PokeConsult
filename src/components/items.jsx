@@ -32,6 +32,9 @@ function Items({ param }) {
             fetchData();
         }
     }, [pokeParam]);
+
+    
+
     if (loading) {
         return (<Box
             display={'flex'}

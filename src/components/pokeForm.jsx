@@ -5,7 +5,7 @@ function PokeForm({setParam}){
     const[pokePram,setPokeParam]=useState('');
 
     const handleSearch =()=>{
-       setParam(pokePram);
+       setParam(pokePram.toLowerCase());
        setPokeParam('');
     //    console.log(pokePram);
     }
