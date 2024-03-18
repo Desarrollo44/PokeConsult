@@ -10,6 +10,7 @@ function Items({ param }) {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
 
+
     useEffect(() => {
         setPokeParam(param);
     }, [param]);
@@ -30,10 +31,30 @@ function Items({ param }) {
         }
         if (pokeParam) {
             fetchData();
+            
         }
     }, [pokeParam]);
 
-    
+   
+        const searchTerm="category";
+        const pokeArray = Object.values(pokeConsult);
+        const filteredData = pokeArray?.filter((item) => {
+            // Convierte cada valor del objeto en una cadena y verifica si contiene el término de búsqueda
+            for (const key in item) {
+              if (Object.prototype.hasOwnProperty.call(item, key)) {
+                const value = item[key];
+                if (
+                  value &&
+                  typeof value === "string" &&
+                  value.toLowerCase().includes(searchTerm.toLowerCase())
+                ) {
+                  return true; // Si alguna propiedad contiene el término de búsqueda, se incluye en los resultados
+                }
+              }
+            }
+            return false;
+          });  
+         
 
     if (loading) {
         return (<Box
@@ -88,7 +109,7 @@ function Items({ param }) {
                                 </Box>
                                 <Box>
                                     <Typography variant="h5">Category:</Typography>
-                                    <Typography marginLeft={2}><li>{pokeConsult.category?.name}</li></Typography>
+                                    <Typography marginLeft={2}><li>{filteredData[0] && filteredData[0].name}</li></Typography>
                                 </Box>
 
                             </Box>
