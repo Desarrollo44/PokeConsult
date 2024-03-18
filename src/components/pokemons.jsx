@@ -23,7 +23,6 @@ function Pokemons({ param }) {
         try {
             const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/?limit=20&offset=${offSetData}`);
             setPokedata(response.data.results);
-            console.log(pokedata);
             setLoading(false);
             //console.log(pokedata[0].name);
         } catch (error) {

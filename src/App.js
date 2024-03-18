@@ -19,9 +19,9 @@ function App() {
   const renderizarC = async (newComponent) => {
     setComponent(newComponent)
   }
-  useEffect(() => {
-    console.log(component);
-  }, [component]);
+  // useEffect(() => {
+  //   console.log(component);
+  // }, [component]);
   const renderComponente = () => {
     switch (component) {
       case 'pokemons':
