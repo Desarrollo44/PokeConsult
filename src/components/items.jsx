@@ -31,30 +31,34 @@ function Items({ param }) {
         }
         if (pokeParam) {
             fetchData();
-            
+
         }
     }, [pokeParam]);
 
-   
-        const searchTerm="category";
-        const pokeArray = Object.values(pokeConsult);
-        const filteredData = pokeArray?.filter((item) => {
-            // Convierte cada valor del objeto en una cadena y verifica si contiene el término de búsqueda
-            for (const key in item) {
-              if (Object.prototype.hasOwnProperty.call(item, key)) {
+    //acedecer a un dato dentro de objeto
+    const searchTerm = "category";
+    const pokeArray = Object.values(pokeConsult);
+    const filteredData = pokeArray?.filter((item) => {
+        // Convierte cada valor del objeto en una cadena y verifica si contiene el término de búsqueda
+        for (const key in item) {
+            if (Object.prototype.hasOwnProperty.call(item, key)) {
                 const value = item[key];
                 if (
-                  value &&
-                  typeof value === "string" &&
-                  value.toLowerCase().includes(searchTerm.toLowerCase())
+                    value &&
+                    typeof value === "string" &&
+                    value.toLowerCase().includes(searchTerm.toLowerCase())
                 ) {
-                  return true; // Si alguna propiedad contiene el término de búsqueda, se incluye en los resultados
+                    return true; // Si alguna propiedad contiene el término de búsqueda, se incluye en los resultados
                 }
-              }
             }
-            return false;
-          });  
-         
+        }
+        return false;
+    });
+    // acceder a un dato dentro de un array de objetos
+    const arrayflavor = Object.values(pokeConsult.flavor_text_entries || []);
+    const filteredDescription = arrayflavor
+        .filter((item) => item && item.language.name === 'en') // Filtra solo los elementos con language.name igual a 'es'
+        .map((item) => item.text); // Mapea los elementos filtrados para obtener solo el texto
 
     if (loading) {
         return (<Box
@@ -105,7 +109,7 @@ function Items({ param }) {
                             <Box display={'flex'} flexDirection={'row'} gap={6}>
                                 <Box>
                                     <Typography variant="h5">Description:</Typography>
-                                    <Typography variant="body1" maxWidth={250} marginLeft={2}><li>{pokeConsult.flavor_text_entries && pokeConsult.flavor_text_entries[0].text}</li></Typography>
+                                    <Typography variant="body1" maxWidth={250} marginLeft={2}><li>{filteredDescription[0]}</li></Typography>
                                 </Box>
                                 <Box>
                                     <Typography variant="h5">Category:</Typography>

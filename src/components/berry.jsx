@@ -1,4 +1,4 @@
-import { Typography, Box, CircularProgress,Fade } from "@mui/material";
+import { Typography, Box, CircularProgress, Fade } from "@mui/material";
 import Table from "@mui/material/Table";
 import { useState, useEffect } from "react";
 import TableBody from '@mui/material/TableBody';
@@ -40,6 +40,19 @@ function Berries({ param }) {
         }
     }, [berryParam]);
 
+    const berryArray = Object.values(berryConsult);
+
+    // const filteredData = berryArray?.filter((item) => {
+      
+    //   });  
+
+    // Imprimir los resultados filtrados (si berryConsult existe)
+    // if (berryConsult) {
+    //     console.log(filteredData);
+    // }
+
+
+
     return (
         <Box>
             {loading ? (
@@ -55,9 +68,9 @@ function Berries({ param }) {
                     <CircularProgress style={{ width: '100px', height: '100px' }} />
                 </Box>
             ) : (
-                
+
                 berryParam === '' ? (
-                    
+
                     <Box
                         display={'flex'}
                         style={{ margin: '0 auto' }}
@@ -73,54 +86,54 @@ function Berries({ param }) {
                 ) : (
                     error === '' ? (
                         <Fade in={error === ''} timeout={2000}>
-                        <Box
-                            display={'flex'}
-                            flexDirection={'column'}
-                            justifyContent={'center'}
-                            width={600}
-                            padding={3}
-                            margin={6}
-                            gap={3}
-                        >
-                            <Typography variant="h4">{`Berry's name: ${berryConsult.name}`}</Typography>
-                            <Box display={'flex'} flexDirection={'row'} gap={6} alignItems={'center'}>
-                                <Box>
-                                    <Typography variant="h5">Flavors:</Typography>
-                                    {berryConsult.flavors && berryConsult.flavors.map(flavors => (
-                                        <Typography marginLeft={2}><li>{flavors.flavor.name}</li></Typography>
-                                    ))}
-                                </Box>
-                                <Box marginLeft={6}>
-                                    <Typography variant="h5">Details:</Typography>
-                                    <br />
-                                    <TableContainer component={Paper}>
+                            <Box
+                                display={'flex'}
+                                flexDirection={'column'}
+                                justifyContent={'center'}
+                                width={600}
+                                padding={3}
+                                margin={6}
+                                gap={3}
+                            >
+                                <Typography variant="h4">{`Berry's name: ${berryConsult.name}`}</Typography>
+                                <Box display={'flex'} flexDirection={'row'} gap={6} alignItems={'center'}>
+                                    <Box>
+                                        <Typography variant="h5">Flavors:</Typography>
+                                        {berryConsult.flavors && berryConsult.flavors.map(flavors => (
+                                            <Typography marginLeft={2}><li>{flavors.flavor.name}</li></Typography>
+                                        ))}
+                                    </Box>
+                                    <Box marginLeft={6}>
+                                        <Typography variant="h5">Details:</Typography>
+                                        <br />
+                                        <TableContainer component={Paper}>
 
-                                        <Table sx={{ minWidth: 650 }} size="middle" aria-label="a dense table">
-                                            <TableHead>
-                                                <TableRow>
-                                                    <TableCell>id</TableCell>
-                                                    <TableCell align="right">growth time(hours)</TableCell>
-                                                    <TableCell align="right">max harvest</TableCell>
-                                                    <TableCell align="right">size(mm)</TableCell>
-                                                    <TableCell align="right">smoothness</TableCell>
-                                                </TableRow>
-                                            </TableHead>
-                                            <TableBody>
-                                                <TableRow
-                                                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                                >
-                                                    <TableCell>{berryConsult.id}</TableCell>
-                                                    <TableCell align="right">{berryConsult.growth_time}</TableCell>
-                                                    <TableCell align="right">{berryConsult.max_harvest}</TableCell>
-                                                    <TableCell align="right">{berryConsult.size}</TableCell>
-                                                    <TableCell align="right">{berryConsult.smoothness}</TableCell>
-                                                </TableRow>
-                                            </TableBody>
-                                        </Table>
-                                    </TableContainer>
+                                            <Table sx={{ minWidth: 650 }} size="middle" aria-label="a dense table">
+                                                <TableHead>
+                                                    <TableRow>
+                                                        <TableCell>id</TableCell>
+                                                        <TableCell align="right">growth time(hours)</TableCell>
+                                                        <TableCell align="right">max harvest</TableCell>
+                                                        <TableCell align="right">size(mm)</TableCell>
+                                                        <TableCell align="right">smoothness</TableCell>
+                                                    </TableRow>
+                                                </TableHead>
+                                                <TableBody>
+                                                    <TableRow
+                                                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                                    >
+                                                        <TableCell>{berryConsult.id}</TableCell>
+                                                        <TableCell align="right">{berryConsult.growth_time}</TableCell>
+                                                        <TableCell align="right">{berryConsult.max_harvest}</TableCell>
+                                                        <TableCell align="right">{berryConsult.size}</TableCell>
+                                                        <TableCell align="right">{berryConsult.smoothness}</TableCell>
+                                                    </TableRow>
+                                                </TableBody>
+                                            </Table>
+                                        </TableContainer>
+                                    </Box>
                                 </Box>
                             </Box>
-                        </Box>
                         </Fade>
                     ) : (
                         <Box
@@ -129,13 +142,13 @@ function Berries({ param }) {
                             margin={'0 auto'}
                             color={'red'}
                         >
-                        <Fade in={error!==''} timeout={2000}>
-                            <div>
-                                <Typography>{error}</Typography>
-                                {/* Otro contenido aquí, como imágenes o videos */}
-                                <img style={{ marginLeft: '6rem' }} src="https://i.pinimg.com/originals/7b/d6/ab/7bd6abf0cb4502e87fd70fad35c66184.gif" alt="error" loop />
-                            </div>
-                        </Fade>
+                            <Fade in={error !== ''} timeout={2000}>
+                                <div>
+                                    <Typography>{error}</Typography>
+                                    {/* Otro contenido aquí, como imágenes o videos */}
+                                    <img style={{ marginLeft: '6rem' }} src="https://i.pinimg.com/originals/7b/d6/ab/7bd6abf0cb4502e87fd70fad35c66184.gif" alt="error" loop />
+                                </div>
+                            </Fade>
                         </Box>
                     )
                 )
