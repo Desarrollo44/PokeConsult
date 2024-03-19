@@ -86,7 +86,7 @@ function Pokemons({ param }) {
                 <Button variant="outlined" disabled={offSetData===0} onClick={handleBack} ><ArrowBackIosIcon /></Button>
                 <Button variant="outlined" onClick={handleOnClick} ><ArrowForwardIosIcon /></Button>
                 <Box
-                    width={'93rem'}
+                    width={'75%'}
                     style={{ margin: '0 auto' }}
                     display={'flex'}
                     flexWrap={'wrap'}
