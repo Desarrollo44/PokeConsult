@@ -83,7 +83,7 @@ function Pokemons({ param }) {
     return (
         <Box>
             <Box padding={2}>
-                <Button variant="outlined" onClick={handleBack} ><ArrowBackIosIcon /></Button>
+                <Button variant="outlined" disabled={offSetData===0} onClick={handleBack} ><ArrowBackIosIcon /></Button>
                 <Button variant="outlined" onClick={handleOnClick} ><ArrowForwardIosIcon /></Button>
                 <Box
                     width={'93rem'}
