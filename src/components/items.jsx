@@ -185,7 +185,7 @@ function Items({ param }) {
                             <Box display={'flex'} flexDirection={'row'} gap={6} marginTop={3}>
                                 <Box>
                                     <Typography variant="h5">Effects:</Typography>
-                                    <Typography variant="body1" maxWidth={250} marginLeft={2}><li>{`${pokeConsult.effect_entries[0] && pokeConsult.effect_entries[0].short_effect}`}</li></Typography>
+                                    <Typography variant="body1" maxWidth={250} marginLeft={2}><li>{`${pokeConsult.effect_entries && pokeConsult.effect_entries[0] && pokeConsult.effect_entries[0].short_effect}`}</li></Typography>
                                 </Box>
                                 <Box>
                                     <Typography variant="h5">Cost:</Typography>
