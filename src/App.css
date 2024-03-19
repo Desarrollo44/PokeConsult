@@ -7,3 +7,9 @@
 .App {
   font-family: 'PokemonSolid', Arial, sans-serif;
 }
+.pokeContent{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  grid-auto-flow: column;
+  gap: 10px;
+}

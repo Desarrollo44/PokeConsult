@@ -18,7 +18,7 @@ function Pokemons({ param }) {
         pokeFech();
     }, [offSetData]);
 
-    async function pokeFech () {
+    async function pokeFech() {
         setLoading(true);
         try {
             const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/?limit=20&offset=${offSetData}`);
@@ -72,16 +72,43 @@ function Pokemons({ param }) {
     }
 
     const handleOnClick = () => {
-       setOffSetData(offSetData + 20);
-       
+        setOffSetData(offSetData + 20);
+
     }
-    const handleBack=()=>{
-        setOffSetData(offSetData-20);
-       
+    const handleBack = () => {
+        setOffSetData(offSetData - 20);
+
     }
 
     return (
         <Box>
+            <Box padding={2}>
+                <Button variant="outlined" onClick={handleBack} ><ArrowBackIosIcon /></Button>
+                <Button variant="outlined" onClick={handleOnClick} ><ArrowForwardIosIcon /></Button>
+                <Box
+                    width={'93rem'}
+                    style={{ margin: '0 auto' }}
+                    display={'flex'}
+                    flexWrap={'wrap'}
+                    justifyContent={'space-around'}
+                    alignItems={'center'}
+                    gap={1}
+                >
+                    {pokedata.map((data, index) => (
+                        <Box
+                            key={index}
+                            width={'10rem'}
+                            border={'solid 3px'}
+                            borderRadius={2}
+                            padding={1}
+
+                        > {/* Asegúrate de incluir un key único para cada elemento */}
+                            <Typography variant="body1">{`id: ${index + offSetData + 1}`}</Typography>
+                            <Typography variant="body1">{`nombre: ${data.name}`}</Typography>
+                        </Box>
+                    ))}
+                </Box>
+            </Box>
 
             <Box>
                 {pokeParam === '' ? (
@@ -101,51 +128,51 @@ function Pokemons({ param }) {
                     </Box>
                 ) : (
                     error === '' ? (
-                        <Fade in={error === ''} timeout={2000}>
-                            <Box
-                                display={'flex'}
-                                flexDirection={'column'}
-                                justifyContent={'center'}
-                                width={600}
-                                padding={3}
-                                margin={6}
-                                gap={3}
-                            >
+                        // <Fade in={error === ''} timeout={2000}>
+                        <Box
+                            display={'flex'}
+                            flexDirection={'column'}
+                            justifyContent={'center'}
+                            width={600}
+                            padding={3}
+                            margin={6}
+                            gap={3}
+                        >
 
 
-                                <Typography variant="h4">{`Pokemon's name: ${pokeConsult.name}`}</Typography>
-                                <Typography variant="h5">{`Pokedex's number: ${pokeConsult.id}`}</Typography>
-                                <Box display={'flex'} flexDirection={'row'} gap={6}>
-                                    <Box>
-                                        <Typography variant="h5">Types:</Typography>
-                                        {pokeConsult.types && pokeConsult.types.map(types => (
-                                            <Typography marginLeft={2}><li>{types.type.name}</li></Typography>
-                                        ))}
-                                    </Box>
-                                    <Box>
-                                        <Typography variant="h5">Abilities:</Typography>
-                                        {pokeConsult.types && pokeConsult.abilities.map(abilities => (
-                                            <Typography marginLeft={2}><li>{abilities.ability.name}</li></Typography>
-                                        ))}
-                                    </Box>
+                            <Typography variant="h4">{`Pokemon's name: ${pokeConsult.name}`}</Typography>
+                            <Typography variant="h5">{`Pokedex's number: ${pokeConsult.id}`}</Typography>
+                            <Box display={'flex'} flexDirection={'row'} gap={6}>
+                                <Box>
+                                    <Typography variant="h5">Types:</Typography>
+                                    {pokeConsult.types && pokeConsult.types.map(types => (
+                                        <Typography marginLeft={2}><li>{types.type.name}</li></Typography>
+                                    ))}
                                 </Box>
-                                <Box
-                                    display={'flex'}
-                                    flexDirection={'row'}
-                                    gap={5}
-                                    margin={5}
-                                >
-                                    <Box>
-                                        <Typography variant="h5">Sprite default:</Typography>
-                                        <img width={'300px'} height={'300px'} alt={pokeConsult.name} src={pokeConsult.sprites?.front_default} />
-                                    </Box>
-                                    <Box>
-                                        <Typography variant="h5">Sprite shiny:</Typography>
-                                        <img width={'300px'} height={'300px'} alt={pokeConsult.name} src={pokeConsult.sprites?.front_shiny} />
-                                    </Box>
+                                <Box>
+                                    <Typography variant="h5">Abilities:</Typography>
+                                    {pokeConsult.types && pokeConsult.abilities.map(abilities => (
+                                        <Typography marginLeft={2}><li>{abilities.ability.name}</li></Typography>
+                                    ))}
                                 </Box>
                             </Box>
-                        </Fade>
+                            <Box
+                                display={'flex'}
+                                flexDirection={'row'}
+                                gap={5}
+                                margin={5}
+                            >
+                                <Box>
+                                    <Typography variant="h5">Sprite default:</Typography>
+                                    <img width={'300px'} height={'300px'} alt={pokeConsult.name} src={pokeConsult.sprites?.front_default} />
+                                </Box>
+                                <Box>
+                                    <Typography variant="h5">Sprite shiny:</Typography>
+                                    <img width={'300px'} height={'300px'} alt={pokeConsult.name} src={pokeConsult.sprites?.front_shiny} />
+                                </Box>
+                            </Box>
+                        </Box>
+                        // </Fade>
                     ) : (
                         <Box
                             width={600}
@@ -167,13 +194,7 @@ function Pokemons({ param }) {
                 )}
 
             </Box>
-            <Button variant="outlined" onClick={handleBack} ><ArrowBackIosIcon/></Button>
-            <Button variant="outlined" onClick={handleOnClick} ><ArrowForwardIosIcon/></Button>
-            {pokedata.map((data,index) => (
-                <Box key={index}> {/* Asegúrate de incluir un key único para cada elemento */}
-                    <Typography variant="body1">{`nombre ${data.name}`}</Typography>
-                </Box>
-            ))}
+            
         </Box>
     );
 }
