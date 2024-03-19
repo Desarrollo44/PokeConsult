@@ -96,11 +96,22 @@ function Pokemons({ param }) {
                 >
                     {pokedata.map((data, index) => (
                         <Box
+                            style={{
+                                backgroundColor: data.name===pokeConsult.name? 'darkgrey':'none',
+                                color: data.name===pokeConsult.name? 'white':'none'
+                            }}
+                            sx={{
+                                ":hover":{
+                                    backgroundColor:"grey",
+                                    color:'whitesmoke'
+                                }
+                            }}
                             key={index}
                             width={'10rem'}
                             border={'solid 3px'}
                             borderRadius={2}
                             padding={1}
+                            onClick={()=>(setPokeParam(index+1+offSetData))}
 
                         > {/* Asegúrate de incluir un key único para cada elemento */}
                             <Typography variant="body1">{`id: ${index + offSetData + 1}`}</Typography>
