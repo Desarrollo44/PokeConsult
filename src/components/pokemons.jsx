@@ -32,9 +32,13 @@ function Pokemons({ param }) {
     };
 
     useEffect(() => {
-        setPokeParam(param);
+        if(param===''){
+            setPokeParam(1);
+        }else{
+            setPokeParam(param);
+        }
+        
     }, [param]);
-
 
     //https://pokeapi.co/api/v2/pokemon?limit=20 hacer paginacion de pokemon
     useEffect(() => {
@@ -56,7 +60,6 @@ function Pokemons({ param }) {
         }
     }, [pokeParam]);
 
-
     if (loading) {
         return (<Box
             display={'flex'}
@@ -71,20 +74,11 @@ function Pokemons({ param }) {
         </Box>);
     }
 
-    const handleOnClick = () => {
-        setOffSetData(offSetData + 20);
-
-    }
-    const handleBack = () => {
-        setOffSetData(offSetData - 20);
-
-    }
-
     return (
         <Box>
             <Box padding={2}>
-                <Button variant="outlined" disabled={offSetData===0} onClick={handleBack} ><ArrowBackIosIcon /></Button>
-                <Button variant="outlined" onClick={handleOnClick} ><ArrowForwardIosIcon /></Button>
+                <Button variant="outlined" disabled={offSetData === 0} onClick={() => (setOffSetData(offSetData - 20))} ><ArrowBackIosIcon /></Button>
+                <Button variant="outlined" disabled={offSetData === 1300} onClick={() => (setOffSetData(offSetData + 20))} ><ArrowForwardIosIcon /></Button>
                 <Box
                     width={'75%'}
                     style={{ margin: '0 auto' }}
@@ -97,13 +91,13 @@ function Pokemons({ param }) {
                     {pokedata.map((data, index) => (
                         <Box
                             style={{
-                                backgroundColor: data.name===pokeConsult.name? 'darkgrey':'none',
-                                color: data.name===pokeConsult.name? 'white':'none'
+                                backgroundColor: data.name === pokeConsult.name ? 'darkgrey' : 'none',
+                                color: data.name === pokeConsult.name ? 'white' : 'none'
                             }}
                             sx={{
-                                ":hover":{
-                                    backgroundColor:"grey",
-                                    color:'whitesmoke'
+                                ":hover": {
+                                    backgroundColor: "grey",
+                                    color: 'whitesmoke'
                                 }
                             }}
                             key={index}
@@ -111,7 +105,7 @@ function Pokemons({ param }) {
                             border={'solid 3px'}
                             borderRadius={2}
                             padding={1}
-                            onClick={()=>(setPokeParam(index+1+offSetData))}
+                            onClick={() => (setPokeParam(index + 1 + offSetData))}
 
                         > {/* Asegúrate de incluir un key único para cada elemento */}
                             <Typography variant="body1">{`id: ${index + offSetData + 1}`}</Typography>
@@ -205,7 +199,7 @@ function Pokemons({ param }) {
                 )}
 
             </Box>
-            
+
         </Box>
     );
 }
