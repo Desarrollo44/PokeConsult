@@ -1,4 +1,4 @@
-import { Typography, Box, CircularProgress, Fade } from "@mui/material";
+import { Typography, Box, CircularProgress, Fade,Button } from "@mui/material";
 import Table from "@mui/material/Table";
 import { useState, useEffect } from "react";
 import TableBody from '@mui/material/TableBody';
@@ -7,6 +7,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 import SearchIcon from '@mui/icons-material/Search';
 import axios from "axios";
@@ -16,10 +18,34 @@ function Berries({ param }) {
     const [berryParam, setBerryParam] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
+    const [pokedata,setPokedata]=useState([]);
+    const [offSetData,setOffSetData]=useState(0);
 
     useEffect(() => {
-        setBerryParam(param);
+        if(param===''){
+            setBerryParam(1);
+        }else{
+            setBerryParam(param);
+        }
+        
     }, [param]);
+
+    useEffect(() => {
+        pokeFech();
+    }, [offSetData]);
+    
+    async function pokeFech() {
+        setLoading(true);
+        try {
+            const response = await axios.get(`https://pokeapi.co/api/v2/berry/?limit=20&offset=${offSetData}`);
+            setPokedata(response.data.results);
+            setLoading(false);
+            //console.log(pokedata[0].name);
+        } catch (error) {
+            setLoading(false);
+            console.log(`error: ${error}`);
+        }
+    };
 
     useEffect(() => {
         async function fetchData() {
@@ -55,6 +81,45 @@ function Berries({ param }) {
 
     return (
         <Box>
+             <Box padding={2}>
+                <Button variant="outlined" disabled={offSetData === 0} onClick={() => (setOffSetData(offSetData - 20))} ><ArrowBackIosIcon /></Button>
+                <Button variant="outlined" disabled={offSetData === 60} onClick={() => (setOffSetData(offSetData + 20))} ><ArrowForwardIosIcon /></Button>
+                <Box
+                    width={'75%'}
+                    style={{ margin: '0 auto' }}
+                    display={'flex'}
+                    flexWrap={'wrap'}
+                    justifyContent={'space-around'}
+                    alignItems={'center'}
+                    gap={1}
+                >
+                    {pokedata.map((data, index) => (
+                        <Box
+                            style={{
+                                backgroundColor: data.name === berryConsult.name ? 'darkgrey' : 'white',
+                                color: data.name === berryConsult.name ? 'white' : 'black'
+                            }}
+                            sx={{
+                                ":hover": {
+                                    backgroundColor: "grey",
+                                    color: 'whitesmoke'
+                                }
+                            }}
+                            key={index}
+                            width={'10rem'}
+                            height={'4rem'}
+                            border={'solid 3px'}
+                            borderRadius={2}
+                            padding={1}
+                            onClick={() => (setBerryParam(index + 1 + offSetData))}
+
+                        > {/* Asegúrate de incluir un key único para cada elemento */}
+                            <Typography variant="body1">{`id: ${index + offSetData + 1}`}</Typography>
+                            <Typography variant="body1">{`nombre: ${data.name}`}</Typography>
+                        </Box>
+                    ))}
+                </Box>
+            </Box>
             {loading ? (
                 <Box
                     display={'flex'}

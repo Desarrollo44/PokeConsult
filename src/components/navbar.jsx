@@ -46,6 +46,11 @@ function Navbar({ setComponent }) {
                     value='pokemons'
                     icon={<PetsIcon style={{ fontSize: 40 }} />} />
                 <BottomNavigationAction
+                    style={{ fontSize: 40 }}
+                    label="Items"
+                    value='items'
+                    icon={<CardTravelRoundedIcon style={{ fontSize: 40 }} />} />
+                <BottomNavigationAction
                     label="Berry"
                     value='berry'
                     icon={<EggAltIcon style={{ fontSize: 40 }} />} />
@@ -54,11 +59,6 @@ function Navbar({ setComponent }) {
                     label="Games"
                     value='games'
                     icon={<VideogameAssetIcon style={{ fontSize: 40 }} />} />
-                <BottomNavigationAction
-                    style={{ fontSize: 40 }}
-                    label="Items"
-                    value='items'
-                    icon={<CardTravelRoundedIcon style={{ fontSize: 40 }} />} />
             </BottomNavigation>
         </Box>
     </>);

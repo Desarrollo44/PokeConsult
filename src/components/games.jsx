@@ -1,4 +1,4 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import Table from "@mui/material/Table";
 import TableBody from '@mui/material/TableBody';
@@ -9,18 +9,42 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
 import SearchIcon from '@mui/icons-material/Search';
-import { Typography, Box, CircularProgress,Fade} from "@mui/material";
+import { Typography, Box, CircularProgress, Fade } from "@mui/material";
 
-function Games({param}){
+function Games({ param }) {
     const [gameConsult, setGameConsult] = useState({});
     const [gameParam, setGameParam] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
-    const [version,setVersion]=useState('');
+    const [version, setVersion] = useState('');
+    const [pokedata,setPokedata]=useState([]);
+   
 
     useEffect(() => {
-        setGameParam(param);
+        if (param === '') {
+            setGameParam(1);
+        } else {
+            setGameParam(param);
+
+        }
     }, [param]);
+
+    useEffect(() => {
+        pokeFech();
+    }, []);
+
+    async function pokeFech() {
+        setLoading(true);
+        try {
+            const response = await axios.get(`https://pokeapi.co/api/v2/generation/?limit=20`);
+            setPokedata(response.data.results);
+            setLoading(false);
+            //console.log(pokedata[0].name);
+        } catch (error) {
+            setLoading(false);
+            console.log(`error: ${error}`);
+        }
+    };
 
     useEffect(() => {
         async function fetchData() {
@@ -41,10 +65,47 @@ function Games({param}){
         }
         setVersion(gameConsult.version);
     }, [gameParam]);
-    
 
-    return(<>
+
+    return (<>
         <Box>
+        <Box padding={2}>
+                
+                <Box
+                    width={'75%'}
+                    style={{ margin: '0 auto' }}
+                    display={'flex'}
+                    flexWrap={'wrap'}
+                    justifyContent={'space-around'}
+                    alignItems={'center'}
+                    gap={1}
+                >
+                    {pokedata.map((data, index) => (
+                        <Box
+                            style={{
+                                backgroundColor: data.name === gameConsult.name ? 'darkgrey' : 'white',
+                                color: data.name === gameConsult.name ? 'white' : 'black'
+                            }}
+                            sx={{
+                                ":hover": {
+                                    backgroundColor: "grey",
+                                    color: 'whitesmoke'
+                                }
+                            }}
+                            key={index}
+                            width={'10rem'}
+                            border={'solid 3px'}
+                            borderRadius={2}
+                            padding={1}
+                            onClick={() => (setGameParam(index + 1 ))}
+
+                        > {/* Asegúrate de incluir un key único para cada elemento */}
+                            <Typography variant="body1">{`id: ${index + 1}`}</Typography>
+                            <Typography variant="body1">{`nombre: ${data.name}`}</Typography>
+                        </Box>
+                    ))}
+                </Box>
+            </Box>
             {loading ? (
                 <Box
                     display={'flex'}
@@ -74,52 +135,52 @@ function Games({param}){
                 ) : (
                     error === '' ? (
                         <Fade in={error === ''} timeout={2000}>
-                        <Box
-                            display={'flex'}
-                            flexDirection={'column'}
-                            justifyContent={'center'}
-                            width={600}
-                            padding={3}
-                            margin={6}
-                            gap={3}
-                        >
-                            <Typography variant="h4">{`Berry's name: ${gameConsult.name}`}</Typography>
-                            <Box display={'flex'} flexDirection={'row'} gap={6} alignItems={'center'}>
-                                {/* <Box>
+                            <Box
+                                display={'flex'}
+                                flexDirection={'column'}
+                                justifyContent={'center'}
+                                width={600}
+                                padding={3}
+                                margin={6}
+                                gap={3}
+                            >
+                                <Typography variant="h4">{`Berry's name: ${gameConsult.name}`}</Typography>
+                                <Box display={'flex'} flexDirection={'row'} gap={6} alignItems={'center'}>
+                                    {/* <Box>
                                     <Typography variant="h5">Flavors:</Typography>
                                     {berryConsult.flavors && berryConsult.flavors.map(flavors => (
                                         <Typography marginLeft={2}><li>{flavors.flavor.name}</li></Typography>
                                     ))}
                                 </Box> */}
-                                <Box marginLeft={6}>
-                                    <Typography variant="h5">Details:</Typography>
-                                    <br />
-                                    <TableContainer component={Paper}>
+                                    <Box marginLeft={6}>
+                                        <Typography variant="h5">Details:</Typography>
+                                        <br />
+                                        <TableContainer component={Paper}>
 
-                                        <Table sx={{ minWidth: 650 }} size="middle" aria-label="a dense table">
-                                            <TableHead>
-                                                <TableRow>
-                                                    <TableCell>id</TableCell>
-                                                    <TableCell align="right">group version</TableCell>
-                                                    <TableCell align="right">mian region</TableCell>
-                                                    
-                                                </TableRow>
-                                            </TableHead>
-                                            <TableBody>
-                                                <TableRow
-                                                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                                >
-                                                    <TableCell>{gameConsult.id}</TableCell>
-                                                    <TableCell align="right">{gameConsult.version_groups && gameConsult.version_groups[0]?.name}</TableCell>
-                                                    <TableCell align="right">{gameConsult.main_region && gameConsult.main_region.name}</TableCell>
-                                                    
-                                                </TableRow>
-                                            </TableBody>
-                                        </Table>
-                                    </TableContainer>
+                                            <Table sx={{ minWidth: 650 }} size="middle" aria-label="a dense table">
+                                                <TableHead>
+                                                    <TableRow>
+                                                        <TableCell>id</TableCell>
+                                                        <TableCell align="right">group version</TableCell>
+                                                        <TableCell align="right">mian region</TableCell>
+
+                                                    </TableRow>
+                                                </TableHead>
+                                                <TableBody>
+                                                    <TableRow
+                                                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                                    >
+                                                        <TableCell>{gameConsult.id}</TableCell>
+                                                        <TableCell align="right">{gameConsult.version_groups && gameConsult.version_groups[0]?.name}</TableCell>
+                                                        <TableCell align="right">{gameConsult.main_region && gameConsult.main_region.name}</TableCell>
+
+                                                    </TableRow>
+                                                </TableBody>
+                                            </Table>
+                                        </TableContainer>
+                                    </Box>
                                 </Box>
                             </Box>
-                        </Box>
                         </Fade>
                     ) : (
                         <Box
@@ -128,13 +189,13 @@ function Games({param}){
                             margin={'0 auto'}
                             color={'red'}
                         >
-                           <Fade in={error!==''} timeout={2000}>
-                            <div>
-                                <Typography>{error}</Typography>
-                                {/* Otro contenido aquí, como imágenes o videos */}
-                                <img style={{ marginLeft: '6rem' }} src="https://i.pinimg.com/originals/7b/d6/ab/7bd6abf0cb4502e87fd70fad35c66184.gif" alt="error" loop />
-                            </div>
-                        </Fade>
+                            <Fade in={error !== ''} timeout={2000}>
+                                <div>
+                                    <Typography>{error}</Typography>
+                                    {/* Otro contenido aquí, como imágenes o videos */}
+                                    <img style={{ marginLeft: '6rem' }} src="https://i.pinimg.com/originals/7b/d6/ab/7bd6abf0cb4502e87fd70fad35c66184.gif" alt="error" loop />
+                                </div>
+                            </Fade>
                         </Box>
                     )
                 )
