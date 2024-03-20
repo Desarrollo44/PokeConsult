@@ -128,15 +128,17 @@ function Pokemons({ param }) {
 
     return (
         <Box>
-            <Box padding={2}>
-                <Box display={'flex'} justifyContent={'space-evenly'}>
+            <Box  padding={2} >
+                <Box display={'flex'} justifyContent={'space-evenly'} marginBottom={3}>
                     <Button variant="outlined" disabled={page === 0} onClick={() => (setPage(page - 4))} ><ArrowBackIosIcon /></Button>
                     <Button variant="outlined" disabled={page === 1300} onClick={() => (setPage(page + 4))} ><ArrowForwardIosIcon /></Button>
                 </Box>
                 {pokemonIds && pokemonIds.map((data, index) => (
                     <Box
                         key={index}
-                        margin={2}
+                        margin={'0 auto'}
+                        marginBottom={2}
+                        width={'1200px'}
                         border={'solid 3px'}
                         borderRadius={'20px'}
                         borderColor={'#8CAA9A'}
@@ -171,7 +173,7 @@ function Pokemons({ param }) {
                     </Box>
                 ))}
 
-                <Box display={'flex'} justifyContent={'space-evenly'}>
+                <Box display={'flex'} justifyContent={'space-evenly'} marginTop={3}>
                     <Button variant="outlined" disabled={page === 0} onClick={() => (setPage(page - 4))} ><ArrowBackIosIcon /></Button>
                     <Button variant="outlined" disabled={page === 1300} onClick={() => (setPage(page + 4))} ><ArrowForwardIosIcon /></Button>
                 </Box>
