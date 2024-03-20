@@ -31,7 +31,7 @@ function Navbar({ setComponent }) {
                 alignItems: 'center'
             }}
         >
-            <img width='50px' height='50px' src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Pok%C3%A9_Ball_icon.svg/2052px-Pok%C3%A9_Ball_icon.svg.png" />
+            <img width='50px' height='50px' alt="logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Pok%C3%A9_Ball_icon.svg/2052px-Pok%C3%A9_Ball_icon.svg.png" />
             <Typography
                 fontSize={'50px'}
                 variant="h1"
